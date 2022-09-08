@@ -1,0 +1,65 @@
+.navButton {
+    color: white;
+    cursor: pointer;
+    margin: 30;
+    background: none;
+    border: none;
+    size: 10;
+    height: 100%;
+    font-size: small;
+}
+
+.disabled {
+    /* opacity: 0.7; */
+    color: aqua;
+    border-bottom: 1px groove aqua;
+}
+
+.navButton:hover {
+    opacity: 0.8;
+    background-color: black;
+}
+
+.block {
+    display: inline-block;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOutAnimation {
+    from {
+        opacity: 1;
+        visibility: visible;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeInAnimation;
+    animation-duration: 1s;
+    visibility: visible;
+}
+
+.fadeOut {
+    animation-name: fadeOutAnimation;
+    animation-duration: 0.5s;
+    visibility: hidden;
+}
+
+.timelineItem{
+    height: 25vh;
+}
