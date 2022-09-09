@@ -35,7 +35,7 @@ const Page = ({post}:any) =>{
                             return <Badge key={uuidv4()} variant={'dot'} color={colors[index]} >{e}</Badge>
                         })}
                     </Group>}
-                    <RichTextEditor value={post.description} readOnly onChange={()=>{}} style={{maxHeight: '75vh'}} />
+                    <RichTextEditor value={post.description} readOnly onChange={()=>{}}/>
                 </Stack>
             </Paper>}
         </Container>

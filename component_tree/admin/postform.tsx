@@ -44,7 +44,7 @@ const Page = ({posts, setPosts, setPostFormModal}:any) =>{
             }).then(res=>res.json()).then(resJson=>{
                 if (resJson.status == 'success' && resJson.post) {
                     if (!posts) setPosts([newPost])
-                    else if (posts)setPosts([...posts, newPost].sort((a,b)=>a.dateCreated>b.dateCreated?-1:1))
+                    else if (posts) setPosts([...posts, newPost].sort((a,b)=>a.dateCreated>b.dateCreated?-1:1))
                     showNotification({
                         title: 'Success',
                         message: 'Post added'

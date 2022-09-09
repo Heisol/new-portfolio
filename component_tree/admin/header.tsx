@@ -31,10 +31,8 @@ const Page = ({posts, setPosts}:any) => {
     <Header height={60} p="xs" style={{backgroundColor: 'black', border: '0', color:'white', alignItems: 'center', justifyContent:'center'}} fixed >
       <Group position='apart' spacing={'xl'} style={{height: '100%', flexDirection: 'row-reverse'}} >
         <Group position='right' style={{flexDirection: 'row-reverse'}} spacing={'xl'} >
-          <button className={`${styles.navButton} ${onPage=='aboutme' && styles.disabled}`} disabled={onPage == 'aboutme' && true} onClick={()=>router.push('/aboutme')} >About Me</button>
-          {/* <button className={`${styles.navButton} ${onPage=='contacts' && styles.disabled}`} disabled={onPage == 'contacts' && true} onClick={()=>router.push('/contacts')}>Contacts</button> */}
-          <button className={`${styles.navButton} ${onPage=='resume' && styles.disabled}`} disabled={onPage == 'resume' && true} onClick={()=>router.push('/resume')}>Resume</button>
-          <button className={`${styles.navButton} ${onPage=='' && styles.disabled}`} disabled={onPage == '' && true} onClick={()=>router.push('/')}>Projects</button>
+          <button className={`${styles.navButton} ${onPage=='aboutme' && styles.disabled} ${styles.header}`} disabled={onPage == 'aboutme' && true} onClick={()=>router.push('/aboutme')} >About Me</button>
+          <button className={`${styles.navButton} ${onPage=='' && styles.disabled} ${styles.header}`} disabled={onPage == '' && true} onClick={()=>router.push('/')}>Projects</button>
         </Group>
           {onAdminPage && <Button leftIcon={<IconPlus size={14}/>} onClick={()=>setPostFormModal(true)} >Add Post</Button>}   
       </Group>
@@ -47,7 +45,7 @@ const Page = ({posts, setPosts}:any) => {
           overlayOpacity={0.8}
           overlayBlur={0.25}
       >
-          {posts && <PostForm posts={posts} setPosts={setPosts} setPostFormModal={setPostFormModal} />}
+          <PostForm posts={posts} setPosts={setPosts} setPostFormModal={setPostFormModal} />
       </Modal>
     </Header>
   )
