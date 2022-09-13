@@ -4,11 +4,18 @@ import { NotificationsProvider, showNotification } from '@mantine/notifications'
 import { useElementSize } from '@mantine/hooks';
 import { IconAt, IconLock } from '@tabler/icons';
 import AdminProper from '../../component_tree/admin/adminproper'
-import Header from '../../component_tree/admin/header'
+import Head from 'next/head';
+import { useRouter } from 'next/router'
+
 
 const Page = () =>{
 
+    const router = useRouter()
+    const [onAdminPage, setOnAdminPage] = useState<boolean>(false)
+
     useEffect(()=>{
+        if (!router.isReady) return
+        setOnAdminPage(router.pathname.split('/').includes('admin'))
         const sessionCheck:(string | null) = localStorage.getItem('9028442d3b9e91eaf0601f6f8bc33167')
         if (sessionCheck) {
             fetch('/api/sessioncheck', {
@@ -23,7 +30,7 @@ const Page = () =>{
                 console.log(error.message|| error || 'error')
             })
         }
-    },[])
+    },[router])
 
     const [authorized, setAuthorized] = useState<boolean>(false)
     const {ref, width, height} = useElementSize()
@@ -83,6 +90,9 @@ const Page = () =>{
     return(
         <MantineProvider withNormalizeCSS withGlobalStyles>
         <NotificationsProvider>
+            <Head>
+                <title>{onAdminPage? 'Admin' : 'Projects'}</title>
+            </Head>
             <Container fluid style={{background: `linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(41,41,41,1) 25%, rgba(0,0,0,1) 100%, rgba(0,212,255,1) 100%)`}} >
             <Center style={{minHeight: '100vh'}}>
                 {!authorized && <Paper shadow="xl" p="md" radius={'xl'} style={{minHeight: 300, minWidth: 300}} ref={ref} >

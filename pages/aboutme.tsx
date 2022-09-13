@@ -9,6 +9,7 @@ import styles from '../styles/global.module.css'
 import { IconBrandJavascript, IconAB2, IconBrandAsana, IconBooks, IconLocation, IconBrandPython, IconBrandNextjs, IconBrandReact, IconServer, IconBrandPhp, IconBrandFacebook, IconPhoneCall, IconBrandGithub, IconMail, IconBrandGoogleDrive } from '@tabler/icons'
 import MePicture from '../public/Me.jpg'
 import Image from 'next/image'
+import Head from 'next/head'
 
 const Page: NextPage = () => {
 
@@ -47,6 +48,9 @@ const Page: NextPage = () => {
       padding={0}
     >
       <Container style={{backgroundColor: theme.colors.gray[0], height: '100%', width: '100%', color: 'black', padding: '2.5%'}} fluid>
+        <Head>
+          <title>Projects</title>
+        </Head>
         <Stack justify={'center'} align='center' >
 
         <Box p={'md'} style={{width: '65%'}} >
