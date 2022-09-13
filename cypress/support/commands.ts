@@ -35,3 +35,4 @@
 //     }
 //   }
 // }
+export const hello = 'Export placeholder'
