@@ -34,12 +34,12 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse)=>{
     res.send({status: 'error', log: 'Internal server error'})
   }
   if (validBody && mongoConnect) {
-    const mongoCursor = await mongoClient.db('Portfolio').collection('Library').findOne({tag: 'userCredentials'})
+    const mongoCursor = await mongoClient.db(process.env.DATABASE_NAME).collection('Library').findOne({tag: 'userCredentials'})
     const emailCheck = validBody.email == mongoCursor.email
     const passwordCheck = bcrypt.compareSync(validBody.password, mongoCursor.password)
     if (emailCheck && passwordCheck) {
       const sessionHash = crypto.randomBytes(8).toString('hex')
-      const insertSession = await mongoClient.db('Portfolio').collection('Library').updateOne({
+      const insertSession = await mongoClient.db(process.env.DATABASE_NAME).collection('Library').updateOne({
         tag: 'onlySession',
       },
       {$set: {hash: sessionHash}},

@@ -29,7 +29,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse)=>{
         res.send({status: 'error', log: 'Internal server error'})
     }
     if (validBody && mongoConnect) {
-        const mongoCursor = await mongoClient.db('Portfolio').collection('Library').findOne({tag: 'onlySession'})
+        const mongoCursor = await mongoClient.db(process.env.DATABASE_NAME).collection('Library').findOne({tag: 'onlySession'})
         const sessionCheck = validBody.session == mongoCursor.hash
         res.send({status: 'success', sessionCheck: sessionCheck})
     }

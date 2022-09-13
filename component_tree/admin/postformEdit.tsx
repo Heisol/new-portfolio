@@ -8,17 +8,15 @@ ssr: false,
 })
 import { v4 as uuidv4 } from 'uuid';
 import { IconPencilPlus } from '@tabler/icons'
-import crypto from 'crypto'
 import { FetchPosts } from './adminproper';
 
-const Page = ({posts, setPosts, setPostFormModal}:any) =>{
+const Page = ({post, setModal, setPosts}:any) =>{
     const theme = useMantineTheme()
-
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [postTitle, setPostTitle] = useState<string>('')
-    const [postUrl, setPostUrl] = useState<string>('')
-    const [postDescription, setPostDescription] = useState<string>('')
-    const [postTags, setPostTags] = useState<Array<string>>([''])
+    const [postTitle, setPostTitle] = useState<string>(post.title)
+    const [postUrl, setPostUrl] = useState<string>(post.url)
+    const [postDescription, setPostDescription] = useState<string>(post.description)
+    const [postTags, setPostTags] = useState<Array<string>>(post.tags)
     const addPost = () =>{
         if (!postTitle) {
             showNotification({
@@ -28,41 +26,34 @@ const Page = ({posts, setPosts, setPostFormModal}:any) =>{
             })
             return
         }
-        const newPost: Post = {
-            id: crypto.randomBytes(8).toString('hex'),
+        const updatedPost: Post = {
+            id: post.id,
             title: postTitle,
             url: postUrl || 'none',
             tags: postTags,
             description: postDescription,
-            dateCreated: new Date(),
+            dateCreated: post.dateCreated,
             lastModified: new Date()
         }
         try {
             setIsLoading(true)
-            fetch('/api/newpost', {
+            fetch('/api/updatepost', {
                 method: 'post',
-                body: JSON.stringify(newPost)
+                body: JSON.stringify(updatedPost)
             }).then(res=>res.json()).then(resJson=>{
-                if (resJson.status == 'success' && resJson.post) {
-                    FetchPosts()
-                    .then((res:any)=>{
-                        if (!res) {
-                            showNotification({
-                                title: 'Error',
-                                message: 'Failed to fetch post. Reloading page in 3 seconds',
-                                color: 'red'
-                            })
-                            setTimeout(()=>location.reload(), 3000)
-                            return
-                        }
-                        setPosts(res)
-                    })
-                    showNotification({
-                        title: 'Success',
-                        message: 'Post added'
-                    })
-                    setPostFormModal(false)
-                }
+                FetchPosts()
+                .then((res:any)=>{
+                    if (!res) {
+                        showNotification({
+                            title: 'Error',
+                            message: 'Failed to fetch post. Reloading page in 3 seconds',
+                            color: 'red'
+                        })
+                        setTimeout(()=>location.reload(), 3000)
+                        return
+                    }
+                    setPosts(res)
+                })
                 setIsLoading(false)
             })
         } catch (error:any) {
@@ -79,9 +70,9 @@ const Page = ({posts, setPosts, setPostFormModal}:any) =>{
             <Container fluid >
                 <Paper p={'md'} shadow={'md'} radius={'md'} style={{minHeight: '80vh', maxWidth: '70vw'}}>
                     <Stack justify={'space-between'} >
-                    <TextInput id='addPostTitle' label='Title' value={postTitle} onChange={e=>setPostTitle(e.target.value)} required />
-                    <TextInput id='addPostUrl' label='Url' value={postUrl} onChange={e=>setPostUrl(e.target.value)} />
-                    <TextInput id='addPostTags' label='Tags' value={postTags} onChange={e=>{
+                    <TextInput label='Title' value={postTitle} onChange={e=>setPostTitle(e.target.value)} required />
+                    <TextInput label='Url' value={postUrl} onChange={e=>setPostUrl(e.target.value)} />
+                    <TextInput label='Tags' value={postTags} onChange={e=>{
                         if (e.target.value.includes(',')) {
                             let toSplit = e.target.value
                             if (toSplit[0] == ',' && toSplit.length>=2) toSplit = toSplit.slice(1,-1)
@@ -110,13 +101,13 @@ const Page = ({posts, setPosts, setPostFormModal}:any) =>{
                         )
                     })}
                     </Group>
-                    <RichTextEditor id='addPostDescription' value={postDescription} onChange={e=>setPostDescription(e)} controls={[
+                    <RichTextEditor value={postDescription} onChange={e=>setPostDescription(e)} controls={[
                     ['bold', 'italic', 'underline', 'link', 'strike', 'blockquote', 'code', 'codeBlock','clean'],
                     ['unorderedList'],
                     ['sup', 'sub'],
                     ['alignLeft', 'alignCenter', 'alignRight'],
                     ]}  />
-                    <Button id='addPostSubmitButton' loading={isLoading} leftIcon={<IconPencilPlus size={14}/>} onClick={addPost} >Post it</Button>
+                    <Button loading={isLoading} leftIcon={<IconPencilPlus size={14}/>} onClick={addPost} >Post it</Button>
                     </Stack>
                 </Paper>
             </Container>

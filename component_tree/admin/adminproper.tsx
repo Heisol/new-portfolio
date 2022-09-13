@@ -15,6 +15,25 @@ import Header from './header'
 import PostsComponent from './posts'
 import PostSkeleton from './postSkeleton'
 
+const fetchPosts:any = () =>{
+    try {
+        return fetch('/api/fetchposts')
+        .then(res=>res.json())
+        .then((resJson:any)=> {
+            if (resJson.status == 'success' && resJson.posts) {
+                const sortedPosts = resJson.posts.map((e:any)=>{
+                    e.id = e._id
+                    delete e._id
+                    return e
+                }).sort((a:Post,b:Post)=>a.dateCreated>b.dateCreated?-1:1)
+                return sortedPosts
+            } else return false
+        })
+    } catch (error) {
+        return error   
+    }
+}
+
 const Page = () =>{
     const router = useRouter()
     const theme = useMantineTheme()
@@ -26,12 +45,10 @@ const Page = () =>{
         try {
             if (!router.isReady) return
             setOnPage(router.pathname.split('/')[1])
-            const fetchPosts = fetch('/api/fetchposts')
-            .then(res=>res.json())
-            .then(resJson=> {
-                if (resJson.status == 'success' && resJson.posts) {
-                    setPosts(resJson.posts.sort((a:Post,b:Post)=>a.dateCreated>b.dateCreated?-1:1))
-                }
+            fetchPosts()
+            .then((res:any)=>{
+                if (!res) return
+                setPosts(res)
                 setIsReady(true)
             })
         } catch (error:any) {
@@ -44,7 +61,6 @@ const Page = () =>{
     }, [router])
 
     return(
-        
         <AppShell
          padding={0}
          styles={(theme) => ({
@@ -52,12 +68,12 @@ const Page = () =>{
          })}
         >
         <>
-        <Header posts={posts} setPost={setPosts} />
+        <Header posts={posts} setPosts={setPosts} />
         <Container fluid style={{ padding: '2.5%', margin: 0, paddingTop: '2.5%', backgroundColor: theme.colors.gray[3], minHeight: '100%'}}>
             { isReady && posts ?
             <>
                 {
-                    posts?.length==0 ? "The user hasn't posted anything yet": <PostsComponent posts={posts}/>
+                    posts?.length==0 ? "The user hasn't posted anything yet": <PostsComponent posts={posts} setPosts={setPosts} />
                 }
             </>
             : <PostSkeleton/>
@@ -69,3 +85,4 @@ const Page = () =>{
 }
 
 export default Page
+export const FetchPosts:Function = fetchPosts

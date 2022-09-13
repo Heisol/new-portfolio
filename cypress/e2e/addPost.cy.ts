@@ -1,0 +1,17 @@
+export const addPost = describe('/admin add post', ()=>{
+    it("Visits '/admin', login , click add post, form should be visible, can submit post, can see new post",()=>{
+        cy.visit('/admin')
+        cy.get('#emailField').type('alidejando@gmail.com')
+        cy.get('#passwordField').type('@TotallyRusty1129')
+        cy.get('#signInButton').click()
+        cy.get('.post').should('be.visible')
+        cy.get('#addPostButton').should('be.visible').click()
+        cy.get('#addPostTitle').type('Sample Post Title')
+        cy.get('#addPostUrl').type('Sample Post Url')
+        cy.get('#addPostTags').type('SampleTag1, SampleTag2')
+        cy.get('#addPostDescription').siblings('.quill').find('.ql-container').find('.ql-editor').find('p').invoke('html', '<strong>hello</strong>')
+        cy.get('#addPostSubmitButton').click()
+        cy.wait(3000)
+        cy.contains('Sample Post Title')
+    })
+})

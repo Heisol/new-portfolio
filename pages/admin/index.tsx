@@ -88,9 +88,9 @@ const Page = () =>{
                 {!authorized && <Paper shadow="xl" p="md" radius={'xl'} style={{minHeight: 300, minWidth: 300}} ref={ref} >
                     <Center style={{height: height, width: width}} >
                         <Stack justify={'center'} align={'center'} spacing='xl'>
-                            <TextInput value={emailField} onChange={(e)=>setEmailField(e.target.value)} label='Email' icon={<IconAt size={14}/>} />
-                            <TextInput type='password' value={passwordField} onChange={(e)=>setPasswordField(e.target.value)} label='Password' icon={<IconLock size={14}/>} />
-                            <Button type='button' onClick={Login} loading={isLoading ? true : false} >{isLoading? 'Signing In' : 'Sign In'}</Button>
+                            <TextInput id={'emailField'} value={emailField} onChange={(e)=>setEmailField(e.target.value)} label='Email' icon={<IconAt size={14}/>} />
+                            <TextInput id={'passwordField'} type='password' value={passwordField} onChange={(e)=>setPasswordField(e.target.value)} label='Password' icon={<IconLock size={14}/>} />
+                            <Button id={'signInButton'} type='button' onClick={Login} loading={isLoading ? true : false} >{isLoading? 'Signing In' : 'Sign In'}</Button>
                         </Stack>
                     </Center>
                 </Paper>}

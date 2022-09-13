@@ -18,7 +18,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse)=>{
         res.send({status: 'error', log: 'Internal server error'})
     }
     if (mongoConnect) {
-        const mongoCursor = await mongoClient.db('Portfolio').collection('Posts').find().toArray()
+        const mongoCursor = await mongoClient.db(process.env.DATABASE_NAME).collection('Posts').find().toArray()
         try {
           if (mongoCursor) res.send({status: 'success', posts: mongoCursor})
         } catch (error:any) {

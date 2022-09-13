@@ -40,3 +40,17 @@
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
+@keyframes borderCircle {
+    from {
+        border-bottom: 1px groove rgb(5, 194, 252)
+    }
+    to {
+        border-bottom: 0.5px groove rgb(113, 214, 245)
+    }
+}
+.editButton {
+    cursor: pointer;
+}
+.editButton:hover{
+    animation: 1s borderCircle infinite alternate-reverse;
+}

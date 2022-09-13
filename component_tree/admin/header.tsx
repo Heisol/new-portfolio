@@ -31,10 +31,10 @@ const Page = ({posts, setPosts}:any) => {
     <Header height={60} p="xs" style={{backgroundColor: 'black', border: '0', color:'white', alignItems: 'center', justifyContent:'center'}} fixed >
       <Group position='apart' spacing={'xl'} style={{height: '100%', flexDirection: 'row-reverse'}} >
         <Group position='right' style={{flexDirection: 'row-reverse'}} spacing={'xl'} >
-          <button className={`${styles.navButton} ${onPage=='aboutme' && styles.disabled} ${styles.header}`} disabled={onPage == 'aboutme' && true} onClick={()=>router.push('/aboutme')} >About Me</button>
-          <button className={`${styles.navButton} ${onPage=='' && styles.disabled} ${styles.header}`} disabled={onPage == '' && true} onClick={()=>router.push('/')}>Projects</button>
+          <button id={'headerAboutMe'} className={`${styles.navButton} ${onPage=='aboutme' && styles.disabled} ${styles.header}`} disabled={onPage == 'aboutme' && true} onClick={()=>router.push('/aboutme')} >About Me</button>
+          <button id={'headerProjects'} className={`${styles.navButton} ${onPage=='' && styles.disabled} ${styles.header}`} disabled={onPage == '' && true} onClick={()=>router.push('/')}>Projects</button>
         </Group>
-          {onAdminPage && <Button leftIcon={<IconPlus size={14}/>} onClick={()=>setPostFormModal(true)} >Add Post</Button>}   
+          {onAdminPage && <Button leftIcon={<IconPlus size={14}/>} onClick={()=>setPostFormModal(true)} id="addPostButton" >Add Post</Button>}   
       </Group>
       <Modal
           opened={postFormModal}
