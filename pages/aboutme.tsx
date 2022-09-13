@@ -49,7 +49,7 @@ const Page: NextPage = () => {
     >
       <Container style={{backgroundColor: theme.colors.gray[0], height: '100%', width: '100%', color: 'black', padding: '2.5%'}} fluid>
         <Head>
-          <title>Projects</title>
+          <title>About Me</title>
         </Head>
         <Stack justify={'center'} align='center' >
 
