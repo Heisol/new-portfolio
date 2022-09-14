@@ -100,14 +100,14 @@ const Page: NextPage = () => {
           </Avatar>          
           <Text size={24} color='blue' style={{fontFamily: 'Lucida Console, Courier New, monospace'}} >Ali D. Andrada</Text>
           <Group position='center' >
-            <Box style={{cursor: 'pointer'}} onClick={copyEmail} className={`${styles.opacityChange} linkIcon`}><IconMail/></Box>
-            <Box style={{cursor: 'pointer'}} onClick={copyPhoneNumber} className={`${styles.opacityChange} linkIcon`}><IconPhoneCall/></Box>
-            <Box style={{cursor: 'pointer'}} onClick={openFacebookLink} className={`${styles.opacityChange} linkIcon`}><IconBrandFacebook/></Box>
-            <Box style={{cursor: 'pointer'}} onClick={openGithubLink} className={`${styles.opacityChange} linkIcon`}><IconBrandGithub/></Box>
+            <Box style={{cursor: 'pointer'}} onClick={copyEmail} className={`${styles.opacityChange} linkIcon`}><IconMail pointerEvents={'none'} /></Box>
+            <Box style={{cursor: 'pointer'}} onClick={copyPhoneNumber} className={`${styles.opacityChange} linkIcon`}><IconPhoneCall pointerEvents={'none'}/></Box>
+            <Box style={{cursor: 'pointer'}} onClick={openFacebookLink} className={`${styles.opacityChange} linkIcon`}><IconBrandFacebook pointerEvents={'none'}/></Box>
+            <Box style={{cursor: 'pointer'}} onClick={openGithubLink} className={`${styles.opacityChange} linkIcon`}><IconBrandGithub pointerEvents={'none'}/></Box>
           </Group>
           <Group position='center' align={'center'} style={{cursor: 'pointer'}} onClick={seeResume} className={`${styles.opacityChange} linkIcon`} >
             <Text style={{fontFamily: 'Lucida Console, Courier New, monospace'}} >See resume at</Text>
-            <IconBrandGoogleDrive/>
+            <IconBrandGoogleDrive pointerEvents={'none'}/>
           </Group>
         </Stack>
         </Box>
