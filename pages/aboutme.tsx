@@ -100,10 +100,10 @@ const Page: NextPage = () => {
           </Avatar>          
           <Text size={24} color='blue' style={{fontFamily: 'Lucida Console, Courier New, monospace'}} >Ali D. Andrada</Text>
           <Group position='center' >
-            <IconMail style={{cursor: 'pointer'}} onClick={copyEmail} className={`${styles.opacityChange} linkIcon`}/>
-            <IconPhoneCall style={{cursor: 'pointer'}} onClick={copyPhoneNumber} className={`${styles.opacityChange} linkIcon`}/>
-            <IconBrandFacebook style={{cursor: 'pointer'}} onClick={openFacebookLink} className={`${styles.opacityChange} linkIcon`}/>
-            <IconBrandGithub style={{cursor: 'pointer'}} onClick={openGithubLink} className={`${styles.opacityChange} linkIcon`}/>
+            <Box style={{cursor: 'pointer'}} onClick={copyEmail} className={`${styles.opacityChange} linkIcon`}><IconMail/></Box>
+            <Box style={{cursor: 'pointer'}} onClick={copyPhoneNumber} className={`${styles.opacityChange} linkIcon`}><IconPhoneCall/></Box>
+            <Box style={{cursor: 'pointer'}} onClick={openFacebookLink} className={`${styles.opacityChange} linkIcon`}><IconBrandFacebook/></Box>
+            <Box style={{cursor: 'pointer'}} onClick={openGithubLink} className={`${styles.opacityChange} linkIcon`}><IconBrandGithub/></Box>
           </Group>
           <Group position='center' align={'center'} style={{cursor: 'pointer'}} onClick={seeResume} className={`${styles.opacityChange} linkIcon`} >
             <Text style={{fontFamily: 'Lucida Console, Courier New, monospace'}} >See resume at</Text>
