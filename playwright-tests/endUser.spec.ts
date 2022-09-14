@@ -14,7 +14,7 @@ export const endUserTest = test('Visit https://aliandrada.vercel.app/ as an end 
   await headerAboutMe.click()
   await expect(page).toHaveURL(/,*aboutme/)
   const linkIcons = await page.$$('.linkIcon')
-  linkIcons.forEach(async(e)=>await e.click())
+  await linkIcons.forEach(e=>e.click())
   await headerProjects.click()
   await expect(page).toHaveURL(/,*/)
 });
