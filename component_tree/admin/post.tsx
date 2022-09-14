@@ -14,12 +14,23 @@ import { IconEditCircle, IconTrash } from '@tabler/icons';
 import styles from '../../styles/global.module.css'
 import { FetchPosts } from './adminproper';
 
+export const randomSort: any = (InputArray: Array<any>)=>{
+    if (!Array) return
+    let tempArray:Array<any> = []
+    while (tempArray.length!==InputArray.length) {
+        const getRandomElement = InputArray[Math.floor(Math.random()*InputArray.length-1)]
+        if (!tempArray.includes(getRandomElement)) tempArray.push(getRandomElement)
+    }
+    return tempArray
+}
+
 const Page = ({post, setPosts}:any) =>{
     const theme = useMantineTheme()
     const router = useRouter()
     const [isHover, setIsHover] = useState<boolean>(false)
     
-    const [colors, setColors] = useState<Array<string>>(Object.entries(theme.colors).map((e)=>e[0]))
+    const [colors, setColors] = useState<Array<string>>(randomSort(Object.entries(theme.colors).map((e)=>e[0])))
+    console.log(colors)
     const [formEditModal, setFormEditModal] = useState<boolean>(false)
     const [deletePostModal, setDeletePostModal] = useState<boolean>(false)
     const [onAdmin, setOnAdmin] = useState<boolean>(false)
@@ -31,7 +42,6 @@ const Page = ({post, setPosts}:any) =>{
 
     const deleteThisPost = () =>{
         fetch(`/api/deletepost/${post.id}`).then(res=>res.json()).then(resJson=>{
-            console.log(resJson)
             if (resJson.status == 'success') {
                 FetchPosts()
                 .then((fetchRes:any)=>{
