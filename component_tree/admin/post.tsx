@@ -30,7 +30,6 @@ const Page = ({post, setPosts}:any) =>{
     const [isHover, setIsHover] = useState<boolean>(false)
     
     const [colors, setColors] = useState<Array<string>>(randomSort(Object.entries(theme.colors).map((e)=>e[0])))
-    console.log(colors)
     const [formEditModal, setFormEditModal] = useState<boolean>(false)
     const [deletePostModal, setDeletePostModal] = useState<boolean>(false)
     const [onAdmin, setOnAdmin] = useState<boolean>(false)
