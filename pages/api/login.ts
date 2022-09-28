@@ -17,7 +17,7 @@ const handler = nc<NextApiRequest, NextApiResponse>({
 });
 
 const reqJoiBody = joi.object({
-  email: joi.string().email().required(),
+  email: joi.string().required(),
   password: joi.string().required()
 })
 
